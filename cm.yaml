@@ -1,0 +1,11 @@
+# manifests/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: wave-test
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+data:
+  MESSAGE: "Hello from sync wave 1"
+

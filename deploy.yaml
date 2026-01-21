@@ -1,0 +1,29 @@
+# manifests/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wave-test-app
+  namespace: wave-test
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wave-test
+  template:
+    metadata:
+      labels:
+        app: wave-test
+    spec:
+      containers:
+      - name: app
+        image: busybox
+        command: ["sh", "-c", "echo $MESSAGE && sleep 3600"]
+        env:
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MESSAGE
+
