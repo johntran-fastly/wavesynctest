@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken-app
+  namespace: wave-demo  # Assumes namespace exists
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broken-app
+  template:
+    metadata:
+      labels:
+        app: broken-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:invalid-tag-999999  # ← Bad image: Will cause ImagePullBackOff, stays Progressing
+        ports:
+        - containerPort: 80
