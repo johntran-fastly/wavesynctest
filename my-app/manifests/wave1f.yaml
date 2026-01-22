@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wave-1-finished
+  namespace: wave-demo
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: log
+        image: busybox:1.36
+        command: ["sh", "-c", "echo '=== WAVE 1 FINISHED at $(date) ==='"]
