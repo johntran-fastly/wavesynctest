@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: app
-        image: nginx:invalid-tag-999999  # ← Bad image: Will cause ImagePullBackOff, stays Progressing
+        image: nginx:1.27-alpine
         ports:
         - containerPort: 80
