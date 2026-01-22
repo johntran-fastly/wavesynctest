@@ -1,7 +1,0 @@
-# manifests/namespace.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: wave-test
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
